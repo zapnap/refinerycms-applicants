@@ -15,6 +15,7 @@ class CreateApplicants < ActiveRecord::Migration
       t.boolean :answer_required
       t.string :answer_type # :text, :string, etc.
       t.integer :character_limit
+      t.integer :position
       t.timestamps
     end
 

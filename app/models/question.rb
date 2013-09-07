@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   self.table_name = 'applicant_questions'
 
   acts_as_indexed :fields => [:name]
-  attr_accessible :name, :character_limit, :answer_type, :answer_required
+  attr_accessible :name, :character_limit, :answer_type, :answer_required, :position
 
   has_many :answers, :foreign_key => :applicant_question_id
   has_many :applicants, :through => :answers
