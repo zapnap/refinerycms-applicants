@@ -1,0 +1,53 @@
+<%= form_for [:admin, @question] do |f| -%>
+  <%= render :partial => "/shared/admin/error_messages", :locals => {
+          :object => @question,
+          :include_object_name => true
+        } %>
+
+  <div class='field'>
+    <%= f.label :name -%>
+    <%= f.text_field :name, :class => 'larger widest' -%>
+  </div>
+
+  <table width="100%" border="0">
+    <tr>
+      <td>
+        <div class='field'>
+          <%= f.label :answer_required -%>
+          <%= f.check_box :answer_required -%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class='field'>
+          <%= f.label :answer_type -%>
+          <%= f.select :answer_type, Question::ANSWER_TYPES -%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class='field'>
+          <%= f.label :character_limit -%>
+          <%= f.text_field :character_limit -%>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <%= render :partial => "/shared/admin/form_actions",
+              :locals => {
+                :f => f,
+                :continue_editing => false,
+                :delete_title => t('delete', :scope => 'admin.questions.question'),
+                :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @question.name)
+              } %>
+<% end -%>
+<% content_for :javascripts do %>
+  <script>
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });
+  </script>
+<% end %>

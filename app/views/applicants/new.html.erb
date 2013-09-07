@@ -1,0 +1,74 @@
+<% content_for :body_content_left do %>
+  <div class='applicants'>
+    <%=raw @page[Page.default_parts.first.to_sym] %>
+
+    <%= form_for @applicant do |f| %>
+      <%= render :partial => "/shared/admin/error_messages",
+                 :locals => {
+                   :object => @applicant,
+                   :include_object_name => true
+                 } %>
+      <div class='field'>
+        <%= f.required_label :name %>
+        <%= f.text_field :name, :maxlength => 255 %>
+      </div>
+
+      <fieldset>
+      <div class='field'>
+        <%= f.required_label :contact_name %>
+        <%= f.text_field :contact_name, :maxlength => 255 %>
+      </div>
+      <div class='field'>
+        <%= f.required_label :contact_email %>
+        <%= f.text_field :contact_email, :maxlength => 255 %>
+      </div>
+      <div class='field'>
+        <%= f.required_label :contact_phone %>
+        <%= f.text_field :contact_phone, :maxlength => 255 %>
+      </div>
+      </fieldset>
+
+      <div style="clear:both;"></div>
+
+      <% @applicant.answers.each do |answer| %>
+        <% f.fields_for(:answers, answer) do |fa| %>
+          <div class='field message_field'>
+            <% if answer.answer_required? %>
+              <%= fa.required_label :body, answer.question.name %>
+            <% else %>
+              <%= fa.label :body, answer.question.name %>
+            <% end %>
+
+            <% if answer.character_limit? %>
+              <div class="hint"><span class="chars"><%= answer.character_limit %></span> characters remaining</div>
+            <% end %>
+
+            <% if answer.answer_type == 'text' %>
+              <%= fa.text_area :body, answer_input_options(answer) %>
+            <% else %>
+              <%= fa.text_field :body, answer_input_options(answer) %>
+            <% end %>
+
+            <%= fa.hidden_field :applicant_question_id, :value => answer.question.id %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <div class='actions'>
+        <%= f.submit t('send'), :class => 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render :partial => "/shared/content_page" %>
+
+<script>
+  $('document').ready(function() {
+    $('.field.message_field').keyup(function() {
+      var max = $(':input', this).attr('maxlength');
+      var remaining = parseInt(max) - $(':input', this).val().length;
+      $(this).find('.hint .chars').text(remaining);
+    });
+  });
+</script>

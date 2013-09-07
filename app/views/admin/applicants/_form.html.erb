@@ -1,0 +1,76 @@
+<%= form_for [:admin, @applicant] do |f| -%>
+  <%= render :partial => "/shared/admin/error_messages", :locals => {
+          :object => @applicant,
+          :include_object_name => true
+        } %>
+
+  <div class='field'>
+    <%= f.label :name -%>
+    <%= f.text_field :name, :class => 'larger widest' -%>
+  </div>
+
+  <table width="100%" border="0">
+    <tr>
+      <td>
+        <div class='field'>
+          <%= f.label :contact_name -%>
+          <%= f.text_field :contact_name -%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class='field'>
+          <%= f.label :contact_email -%>
+          <%= f.text_field :contact_email -%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class='field'>
+          <%= f.label :contact_phone -%>
+          <%= f.text_field :contact_phone -%>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class='field'>
+    <div id='page-tabs' class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
+      <ul id='page_parts'>
+        <% @applicant.answers.each_with_index do |answer, part_index| %>
+          <li class='ui-state-default<%= ' ui-state-active' if part_index == 0 %>'>
+            <%= link_to answer.question.name, "##{answer.question.name.parameterize}" %>
+          </li>
+        <% end %>
+      </ul>
+
+      <div id='page_part_editors'>
+        <% @applicant.answers.each do |answer| %>
+          <% f.fields_for(:answers, answer) do |fa| %>
+            <div class='page_part' id='<%= answer.question.name.parameterize %>'>
+              <%= fa.text_area :body, :rows => 20, :class => 'wymeditor widest', :maxlength => answer.character_limit -%>
+              <%= fa.hidden_field :applicant_question_id, :value => answer.question.id %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= render :partial => "/shared/admin/form_actions",
+              :locals => {
+                :f => f,
+                :continue_editing => false,
+                :delete_title => t('delete', :scope => 'admin.applicants.applicant'),
+                :delete_confirmation => t('message', :scope => 'shared.admin.delete', :title => @applicant.name)
+              } %>
+<% end -%>
+<% content_for :javascripts do %>
+  <script>
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });
+  </script>
+<% end %>

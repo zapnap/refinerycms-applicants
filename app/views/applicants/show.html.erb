@@ -1,0 +1,53 @@
+<% content_for :body_content_title do %>
+  <%= @applicant.name %>
+<% end %>
+
+<% content_for :body_content_left do %>
+  <section>
+    <h1>Name</h1>
+    <p>
+      <%=raw @applicant.name %>
+    </p>
+  </section>
+  <section>
+    <h1>Founder1 Name</h1>
+    <p>
+      <%=raw @applicant.contact_name %>
+    </p>
+  </section>
+  <section>
+    <h1>Founder1 Email</h1>
+    <p>
+      <%=raw @applicant.contact_email %>
+    </p>
+  </section>
+  <section>
+    <h1>Founder1 Phone</h1>
+    <p>
+      <%=raw @applicant.contact_phone %>
+    </p>
+  </section>
+  <% (1..10).to_a.each do |q| %>
+    <section>
+      <h1><%= t("activerecord.attributes.applicant.question_#{q}") %></h1>
+      <p>
+        <%= raw @applicant.send("question_#{q}") %>
+      </p>
+    </section>
+  <% end %>
+<% end %>
+
+<% content_for :body_content_right do %>
+  <aside>
+    <h2><%= t('other') %></h2>
+    <ul id="applicants">
+      <% @applicants.each do |applicant| %>
+        <li>
+          <%= link_to applicant.name, applicant_url(applicant) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render :partial => "/shared/content_page" %>
