@@ -1,10 +1,33 @@
-# Applicants engine for Refinery CMS.
+# Applicants engine for Refinery CMS (1.0.x)
 
-## How to build this engine as a gem
+## About
 
-    cd vendor/engines/applicants
-    gem build refinerycms-applicants.gempspec
-    gem install refinerycms-applicants.gem
+Adds a lightweight applicant management engine to your Refinery-based site.
+Visitors can apply to be part of your program, exhibit at your event, etc by
+filling out a form. You can add and edit questions for the form and manage
+visitor submissions via the Refinery admin interface.
 
-    # Sign up for a http://rubygems.org/ account and publish the gem
-    gem push refinerycms-applicants.gem
+
+## Requirements
+
+[Refinery CMS](http://refinerycms.com) version 1.0.x. This plugin does _not_
+work with Refinery 2.x. Sorry. It's extracted from a couple older Refinery sites
+that are still being maintained. Pull requests welcome if someone wants to
+modernize it :).
+
+
+## Installation
+
+Include the latest [gem](http://rubygems.org/gems/refinerycms-applicants) into your
+Refinery CMS application's Gemfile:
+
+```ruby
+gem "refinerycms-applicants", '~> 2.0.0'
+```
+
+Then run the following commands to install the Gem and migrate your database:
+
+    bundle install
+    rails generate refinery_applicants
+    rake db:migrate
+
