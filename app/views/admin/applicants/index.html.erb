@@ -1,7 +1,10 @@
 <div id='records'>
-  <% if searching? %>
-    <h2><%= t('results_for', :scope => 'shared.admin.search', :query => params[:search]) %></h2>
-  <% end %>
+  <h2>
+    <%= t('admin.applicants.index.title') %>
+    <% if searching? %>
+      &mdash; <%= t('results_for', :scope => 'shared.admin.search', :query => params[:search]) %>
+    <% end %>
+  </h2>
   <% if @applicants.any? %>
     <div class='pagination_container'>
       <%= render :partial => 'applicants' %>
@@ -46,6 +49,9 @@
                    :class => "reorder_icon" %>
     </li>
   <% end %>
+    <li>
+      <%= link_to t('admin.questions.index.title'), admin_questions_url, :class => "edit_icon" %>
+    </li>
   </ul>
 </div>
 <%= render :partial => "/shared/admin/make_sortable",

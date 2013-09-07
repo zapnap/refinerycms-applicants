@@ -1,3 +1,5 @@
+<h2><%= t('admin.questions.index.title') %></h2>
+
 <%= form_for [:admin, @question] do |f| -%>
   <%= render :partial => "/shared/admin/error_messages", :locals => {
           :object => @question,
