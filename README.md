@@ -1,4 +1,4 @@
-# Applicants engine for Refinery CMS (1.0.x)
+# Applicants engine for Refinery CMS
 
 ## About
 
