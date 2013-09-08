@@ -16,6 +16,7 @@ class CreateApplicants < ActiveRecord::Migration
       t.string :answer_type # :text, :string, etc.
       t.integer :character_limit
       t.integer :position
+      t.datetime :deleted_at
       t.timestamps
     end
 

@@ -2,7 +2,8 @@ module Admin
   class QuestionsController < Admin::BaseController
 
     crudify :question,
-            :title_attribute => 'name'
+            :title_attribute => 'name',
+            :conditions => 'deleted_at IS NULL'
 
     def index
       search_all_questions if searching?

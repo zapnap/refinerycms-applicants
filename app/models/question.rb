@@ -9,6 +9,8 @@ class Question < ActiveRecord::Base
   has_many :answers, :foreign_key => :applicant_question_id
   has_many :applicants, :through => :answers
 
+  scope :current, where('deleted_at IS NULL')
+
   validates :name, :presence => true, :uniqueness => true
   validates :answer_type, :presence => true, :inclusion => ANSWER_TYPES
 
@@ -16,6 +18,11 @@ class Question < ActiveRecord::Base
 
   def character_limit?
     character_limit && character_limit > 0
+  end
+
+  # override for 'safe delete'
+  def destroy
+    update_attribute(:deleted_at, Time.now)
   end
 
   private

@@ -13,7 +13,7 @@ class Applicant < ActiveRecord::Base
   validates :contact_phone, :presence => true
 
   def build_answers
-    Question.all.each do |q|
+    Question.current.all.each do |q|
       answers.build(:question => q)
     end
 
