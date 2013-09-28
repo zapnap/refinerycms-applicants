@@ -9,6 +9,8 @@ Gem::Specification.new do |s|
   s.name              = 'refinerycms-applicants'
   s.version           = Refinery::Applicants::VERSION
   s.description       = 'Ruby on Rails Applicants engine for Refinery CMS'
+  s.license           = 'MIT'
+  s.homepage          = 'http://github.com/zapnap/refinerycms-applicants'
   s.authors           = ['Nick Plante']
   s.email             = ['nap@zerosum.org']
   s.summary           = 'Applicants engine for Refinery CMS'
