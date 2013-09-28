@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
   has_many :answers, :foreign_key => :applicant_question_id
   has_many :applicants, :through => :answers
 
-  scope :current, where('deleted_at IS NULL')
+  scope :current, where('deleted_at IS NULL').order('position ASC')
 
   validates :name, :presence => true, :uniqueness => true
   validates :answer_type, :presence => true, :inclusion => ANSWER_TYPES
