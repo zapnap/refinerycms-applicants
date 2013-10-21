@@ -28,6 +28,6 @@ gem "refinerycms-applicants"
 Then run the following commands to install the Gem and migrate your database:
 
     bundle install
-    rails generate refinery_applicants
+    rails generate refinerycms_applicants
     rake db:migrate
 
