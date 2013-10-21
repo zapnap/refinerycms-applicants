@@ -22,7 +22,7 @@ Include the latest [gem](http://rubygems.org/gems/refinerycms-applicants) into y
 Refinery CMS application's Gemfile:
 
 ```ruby
-gem "refinerycms-applicants", '~> 2.0.0'
+gem "refinerycms-applicants"
 ```
 
 Then run the following commands to install the Gem and migrate your database:
