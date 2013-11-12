@@ -13,21 +13,6 @@
         <%= f.text_field :name, :maxlength => 255 %>
       </div>
 
-      <fieldset>
-      <div class='field'>
-        <%= f.required_label :contact_name %>
-        <%= f.text_field :contact_name, :maxlength => 255 %>
-      </div>
-      <div class='field'>
-        <%= f.required_label :contact_email %>
-        <%= f.text_field :contact_email, :maxlength => 255 %>
-      </div>
-      <div class='field'>
-        <%= f.required_label :contact_phone %>
-        <%= f.text_field :contact_phone, :maxlength => 255 %>
-      </div>
-      </fieldset>
-
       <div style="clear:both;"></div>
 
       <% @applicant.answers.each do |answer| %>

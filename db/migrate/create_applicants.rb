@@ -3,9 +3,6 @@ class CreateApplicants < ActiveRecord::Migration
   def self.up
     create_table :applicants do |t|
       t.string :name
-      t.string :contact_name
-      t.string :contact_email
-      t.string :contact_phone
       t.integer :position
       t.timestamps
     end
