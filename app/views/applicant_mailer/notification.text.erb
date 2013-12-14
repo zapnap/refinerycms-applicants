@@ -1,0 +1,10 @@
+A new application has been received for <%= @host %>.
+
+Name: <%= @applicant.name %>
+Email: <%= @applicant.email %>
+
+<% @applicant.answers.each do |answer| -%>
+Q: <%= answer.question.name %>
+A: <%= answer.body %>
+
+<% end -%>

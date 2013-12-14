@@ -31,3 +31,7 @@ Then run the following commands to install the Gem and migrate your database:
     rails generate refinerycms_applicants
     rake db:migrate
 
+If you wish to enable email notifications, log into the Refinery admin and edit
+the applicant_recipients setting:
+
+    ['myemail@example.com']
