@@ -14,7 +14,7 @@ class ApplicantsController < ApplicationController
   def create
     @applicant = Applicant.new(params[:applicant])
     if @applicant.save
-      if RefinerySetting.find_or_set(:applicant_recipients, []).present?
+      if RefinerySetting.find_or_set(:applicant_recipients, '').present?
         ApplicantMailer.notification(@applicant, request).deliver
       end
       redirect_to thank_you_applicants_url

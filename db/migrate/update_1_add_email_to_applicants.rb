@@ -1,7 +1,7 @@
 class Update1AddEmailToApplicants < ActiveRecord::Migration
   def self.up
     add_column :applicants, :email, :string
-    RefinerySetting.find_or_set(:applicant_recipients, [])
+    RefinerySetting.find_or_set(:applicant_recipients, '')
   end
 
   def self.down
