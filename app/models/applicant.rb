@@ -1,4 +1,7 @@
+require 'csv'
+
 class Applicant < ActiveRecord::Base
+  CSV_FIELDS = [:id, :name, :email, :created_at]
 
   has_many :answers
   has_many :questions, :through => :answers
@@ -16,5 +19,20 @@ class Applicant < ActiveRecord::Base
     end
 
     answers
+  end
+
+  def to_a(question_ids=[])
+    ansdata = answers.select { |ans| question_ids.include?(ans.question.id) }.map(&:body)
+    attributes.values_at(*CSV_FIELDS.map(&:to_s)) + ansdata
+  end
+
+  def self.to_csv
+    questions = Question.all # current questions
+    CSV.generate do |csv|
+      csv << CSV_FIELDS + questions.map(&:name)
+      self.order(:position).each do |applicant|
+        csv << applicant.to_a(questions.map(&:id))
+      end
+    end
   end
 end
