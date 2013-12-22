@@ -22,12 +22,12 @@ class Applicant < ActiveRecord::Base
   end
 
   def to_a(question_ids=[])
-    ansdata = answers.select { |ans| question_ids.include?(ans.question.id) }.map(&:body)
-    attributes.values_at(*CSV_FIELDS.map(&:to_s)) + ansdata
+    adata = question_ids.map { |qid| answers.where(applicant_question_id: qid).first.try(:body) }
+    attributes.values_at(*CSV_FIELDS.map(&:to_s)) + adata
   end
 
   def self.to_csv
-    questions = Question.all # current questions
+    questions = Question.order(:position).all # current questions
     CSV.generate do |csv|
       csv << CSV_FIELDS + questions.map(&:name)
       self.order(:position).each do |applicant|
