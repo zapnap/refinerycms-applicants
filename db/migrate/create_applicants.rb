@@ -39,6 +39,8 @@ class CreateApplicants < ActiveRecord::Migration
     Page.delete_all({:link_url => "/applicants"})
 
     drop_table :applicants
+    drop_table :applicant_questions
+    drop_table :applicant_answers
   end
 
 end
