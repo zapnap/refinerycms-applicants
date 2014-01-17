@@ -3,6 +3,7 @@ class CreateApplicants < ActiveRecord::Migration
   def self.up
     create_table :applicants do |t|
       t.string :name
+      t.string :email
       t.integer :position
       t.timestamps
     end
@@ -31,6 +32,8 @@ class CreateApplicants < ActiveRecord::Migration
     add_index :applicant_answers, :applicant_question_id
 
     load(Rails.root.join('db', 'seeds', 'applicants.rb'))
+
+    RefinerySetting.find_or_set(:applicant_recipients, '')
   end
 
   def self.down
